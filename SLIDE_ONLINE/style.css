@@ -64,15 +64,13 @@ body {
 
 .bg-layer {
     position: absolute;
-    inset: -40px;
+    inset: 0;
     background-size: cover;
     background-position: center;
-    filter: blur(60px) saturate(1.4) brightness(0.25);
+    filter: blur(32px) saturate(1.2) brightness(0.26);
     opacity: 0;
-    transition: opacity 1.2s ease;
-    transform: scale(1.1);
-}
-
+    transition: opacity 0.8s ease;
+    transform: scale(1.05);
 .bg-layer.active {
     opacity: 1;
 }
@@ -97,10 +95,8 @@ body {
 
 .particle {
     position: absolute;
-    width: 3px;
-    height: 3px;
-    background: var(--accent);
-    border-radius: 50%;
+    width: 2px;
+    height: 2px;
     opacity: 0;
     animation: particleFloat linear infinite;
 }
@@ -294,17 +290,13 @@ body {
     max-height: 100%;
     object-fit: contain;
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
     opacity: 0;
     transform: scale(0.96);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
     user-select: none;
     -webkit-user-drag: none;
-}
-
-.slide img.loaded {
-    opacity: 1;
-    transform: scale(1);
+    will-change: opacity, transform;
 }
 
 /* Loader */
@@ -587,19 +579,13 @@ body {
     position: fixed;
     inset: 0;
     z-index: 100;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.96);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.lightbox.open {
-    opacity: 1;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     visibility: visible;
 }
 
@@ -801,15 +787,20 @@ button:focus:not(:focus-visible) {
     }
 }
 
-/* Print hidden */
-@media print {
+@media (prefers-reduced-motion: reduce) {
+    * {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+    }
 
-    .header,
-    .controls,
-    .thumb-strip,
-    .nav-arrow,
-    #bg-container,
     #particles {
-        display: none !important;
+        display: none;
+    }
+
+    .bg-layer {
+        filter: none;
+    }
+}
     }
 }
