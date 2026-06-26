@@ -71,6 +71,8 @@ body {
     opacity: 0;
     transition: opacity 0.8s ease;
     transform: scale(1.05);
+}
+
 .bg-layer.active {
     opacity: 1;
 }
@@ -297,6 +299,11 @@ body {
     user-select: none;
     -webkit-user-drag: none;
     will-change: opacity, transform;
+}
+
+.slide img.loaded {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* Loader */
@@ -586,6 +593,10 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.open {
+    opacity: 1;
     visibility: visible;
 }
 

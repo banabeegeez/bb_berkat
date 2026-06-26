@@ -36,8 +36,8 @@
   const lightboxClose = $("#lightbox-close");
   const particlesContainer = $("#particles");
 
-  // --- Image base path (images are in parent folder) ---
-  const imgBase = "../images/";
+  // --- Image base path (images are in root images folder) ---
+  const imgBase = "images/";
 
   // --- State ---
   let currentIndex = 0;
