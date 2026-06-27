@@ -1594,5 +1594,5 @@ const covers = [
 // Logo images (displayed in header)
 // Add your logo file(s) here, e.g. "logo.png"
 const logos = [
-  // Example: "logo.png",
+  "LOGO BB GOLD.png",
 ];
