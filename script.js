@@ -38,10 +38,14 @@
   const coverLayer = $("#cover-layer");
   const coverImg = $("#cover-img");
   const coverSkipBtn = $("#cover-skip-btn");
+  const brandLogo = $("#brand-logo");
+  const brandIconSvg = $("#brand-icon-svg");
+  const brandIcon = $("#brand-icon");
 
   // --- Image base path (images are in root images folder) ---
   const imgBase = "images/";
   const coversBase = "covers/";
+  const logosBase = "logos/";
 
   // --- State ---
   let currentIndex = 0;
@@ -72,10 +76,28 @@
     createThumbnails();
     createParticles();
     bindEvents();
+    displayLogoIfExists();
     displayCoverIfExists();
     if (!coverShown) {
       goToSlide(0, false);
       updateBackground(0);
+    }
+  }
+
+  // --- Logo Display ---
+  function displayLogoIfExists() {
+    if (typeof logos !== "undefined" && logos.length > 0) {
+      brandLogo.src = logosBase + logos[0];
+      brandLogo.onload = () => {
+        brandLogo.classList.remove("hidden");
+        brandIconSvg.classList.add("hidden");
+        brandIcon.classList.add("has-logo");
+      };
+      brandLogo.onerror = () => {
+        // If logo fails to load, keep the default SVG icon
+        brandLogo.classList.add("hidden");
+        brandIconSvg.classList.remove("hidden");
+      };
     }
   }
 

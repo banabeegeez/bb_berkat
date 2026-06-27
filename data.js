@@ -1,4 +1,4 @@
-﻿const images = [
+const images = [
   "IKY_8577.webp",
   "IKY_8578.webp",
   "IKY_8579.webp",
@@ -1588,6 +1588,11 @@
 // Cover images (displayed on first load)
 // Add your cover images here
 const covers = [
-  // Example: "cover1.webp",
-  // Example: "cover2.webp",
+  "cover.jpg",
+];
+
+// Logo images (displayed in header)
+// Add your logo file(s) here, e.g. "logo.png"
+const logos = [
+  // Example: "logo.png",
 ];

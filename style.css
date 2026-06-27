@@ -265,6 +265,21 @@ body {
   height: 20px;
 }
 
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.brand-icon.has-logo {
+  background: transparent;
+  border-color: transparent;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+}
+
 .brand-text h1 {
   font-family: var(--font-display);
   font-size: 1.2rem;
@@ -944,6 +959,11 @@ button:focus:not(:focus-visible) {
   .brand-icon svg {
     width: 24px;
     height: 24px;
+  }
+
+  .brand-icon.has-logo {
+    width: 56px;
+    height: 56px;
   }
 
   .brand-text h1 {
