@@ -179,7 +179,8 @@ body {
 .cover-skip-btn {
   position: absolute;
   bottom: 30px;
-  right: 30px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -199,11 +200,11 @@ body {
   background: rgba(201, 169, 110, 0.25);
   border-color: var(--accent);
   box-shadow: 0 0 24px var(--accent-glow);
-  transform: translateX(4px);
+  transform: translateX(-50%) translateY(-3px);
 }
 
 .cover-skip-btn:active {
-  transform: translateX(2px);
+  transform: translateX(-50%) translateY(-1px);
 }
 
 .cover-skip-btn svg {
@@ -1079,7 +1080,6 @@ button:focus:not(:focus-visible) {
 
   .cover-skip-btn {
     bottom: 50px;
-    right: 50px;
     padding: 16px 28px;
     font-size: 1.1rem;
   }
