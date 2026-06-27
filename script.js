@@ -35,9 +35,13 @@
   const lightboxImg = $("#lightbox-img");
   const lightboxClose = $("#lightbox-close");
   const particlesContainer = $("#particles");
+  const coverLayer = $("#cover-layer");
+  const coverImg = $("#cover-img");
+  const coverSkipBtn = $("#cover-skip-btn");
 
   // --- Image base path (images are in root images folder) ---
   const imgBase = "images/";
+  const coversBase = "covers/";
 
   // --- State ---
   let currentIndex = 0;
@@ -51,6 +55,7 @@
   let touchStartY = 0;
   let isDragging = false;
   let thumbnailObserver = null;
+  let coverShown = false;
   const totalImages = images.length;
   const preloadRange = 2; // Preload 2 images ahead for faster initial load
   const thumbPlaceholder =
@@ -67,8 +72,38 @@
     createThumbnails();
     createParticles();
     bindEvents();
-    goToSlide(0, false);
-    updateBackground(0);
+    displayCoverIfExists();
+    if (!coverShown) {
+      goToSlide(0, false);
+      updateBackground(0);
+    }
+  }
+
+  // --- Cover Display ---
+  function displayCoverIfExists() {
+    if (covers && covers.length > 0) {
+      coverShown = true;
+      coverImg.src = coversBase + covers[0];
+      coverLayer.classList.remove("hidden");
+    } else {
+      coverLayer.classList.add("hidden");
+    }
+  }
+
+  function hideCover() {
+    if (coverShown) {
+      coverLayer.classList.add("hidden");
+      setTimeout(() => {
+        goToSlide(0, false);
+        updateBackground(0);
+      }, 400);
+      coverShown = false;
+    }
+  }
+
+  // --- Helper: Extract filename without extension ---
+  function getFileNameWithoutExtension(filename) {
+    return filename.split(".").slice(0, -1).join(".");
   }
 
   // --- Create Slides ---
@@ -87,7 +122,13 @@
       // Don't set src yet — lazy load
       img.addEventListener("click", () => openLightbox(i));
 
+      // Create photo label overlay
+      const label = document.createElement("div");
+      label.className = "photo-label";
+      label.textContent = getFileNameWithoutExtension(images[i]);
+
       slide.appendChild(img);
+      slide.appendChild(label);
       fragment.appendChild(slide);
     }
     slideTrack.appendChild(fragment);
@@ -355,10 +396,12 @@
       document.documentElement.requestFullscreen().catch(() => {});
       fsExpand.classList.add("hidden");
       fsCollapse.classList.remove("hidden");
+      thumbStrip.classList.add("hidden");
     } else {
       document.exitFullscreen();
       fsExpand.classList.remove("hidden");
       fsCollapse.classList.add("hidden");
+      thumbStrip.classList.remove("hidden");
     }
   }
 
@@ -366,6 +409,7 @@
     if (!document.fullscreenElement) {
       fsExpand.classList.remove("hidden");
       fsCollapse.classList.add("hidden");
+      thumbStrip.classList.remove("hidden");
     }
   });
 
@@ -458,6 +502,12 @@
 
   // --- Bind Events ---
   function bindEvents() {
+    // Cover skip button
+    coverSkipBtn.addEventListener("click", hideCover);
+    coverLayer.addEventListener("click", (e) => {
+      if (e.target === coverLayer) hideCover();
+    });
+
     // Navigation
     prevBtn.addEventListener("click", () => {
       prevSlide();

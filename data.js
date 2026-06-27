@@ -1584,3 +1584,10 @@
   "JHO_9998.webp",
   "JHO_9999.webp",
 ];
+
+// Cover images (displayed on first load)
+// Add your cover images here
+const covers = [
+  // Example: "cover1.webp",
+  // Example: "cover2.webp",
+];
