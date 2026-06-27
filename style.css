@@ -424,8 +424,10 @@ body {
 .photo-label {
   position: absolute;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(12px);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
   padding: 10px 16px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
@@ -437,8 +439,10 @@ body {
   font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: 0.01em;
+  text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   opacity: 0;
+  transform: translateY(12px);
   transition:
     opacity 0.4s ease,
     transform 0.4s ease;
@@ -451,7 +455,7 @@ body {
 
 .slide img.loaded + .photo-label {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 /* Loader */
@@ -1060,7 +1064,6 @@ button:focus:not(:focus-visible) {
 
   .photo-label {
     bottom: 30px;
-    left: 30px;
     padding: 14px 20px;
     font-size: 1.1rem;
   }
